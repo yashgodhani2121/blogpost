@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html lang="en"> 
+
+ <head> 
+
+  <meta charset="UTF-8"> 
+
+  <title> Login Form</title> 
+
+  <link rel="stylesheet" href="/css/style.css"> 
+ </head> 
+
+ <body>
+    <%-include('header2')%>
+    <div class="loginform">
+      <div class="overlay">
+          <form action="/checkuserlogin" method="post">
+              <h2>Log In</h2>
+              <p>Login using your email and password</p>
+              <input name="email" type="text" placeholder="Email" style="margin:20px 0; ">
+              <input type="password" name="password" placeholder="Password" >
+              <button class="log-in">Log In</button>
+             <a href="/userRegister">Sign Up</a>
+          </form>
+      </div>
+  </div>
+ </body>
+
+</html>

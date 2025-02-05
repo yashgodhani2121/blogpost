@@ -1,0 +1,156 @@
+<%- include('header') %>
+
+<main class="app-main">
+  <!-- Begin: App Content Header -->
+  <div class="app-content-header py-3 bg-light border-bottom">
+    <!-- Begin: Container -->
+    <div class="container-fluid">
+      <!-- Begin: Row -->
+      <div class="row align-items-center">
+        <div class="col-sm-6">
+          <h3 class="mb-0 text-primary">Admin Data Tables</h3>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item active text-muted" aria-current="page">Simple Tables</li>
+          </ol>
+        </div>
+      </div>
+      <!-- End: Row -->
+    </div>
+    <!-- End: Container -->
+  </div>
+  <!-- End: App Content Header -->
+
+  <!-- Begin: App Content -->
+  <div class="app-content py-4">
+    <!-- Begin: Container -->
+    <div class="container-fluid">
+      <!-- Begin: Row -->
+      <div class="row justify-content-center">
+        <!-- Begin: Col -->
+        <div class="col-md-10">
+          <div class="card shadow-sm mb-4">
+            <!-- Begin: Card Header -->
+            <div class="card-header ">
+              <h5 class="card-title mb-0">Admin Table</h5>
+            </div>
+            <!-- End: Card Header -->
+
+            <!-- Begin: Card Body -->
+            <div class="card-body">
+              <div class="table-responsive">
+                <form class="d-flex mb-3" >
+                  <input
+                    type="text"
+                    name="blogSearch"
+                    placeholder="Search Blog"
+                    value="<%= search %>"
+                    class="form-control me-2"
+                  />
+                  <button type="submit" name="Search" class="btn btn-primary me-2">Search</button>
+                  <a href="" class="btn btn-secondary">Reset</a>
+                </form>
+             <form method="post" action="/deleteallBlogs">
+                <table class="table table-bordered table-hover">
+                  <thead class="table-light">
+                    <tr>
+                      <th> 
+                        <input type="checkbox" id="checkAll" name="checkAll" /> 
+                        <button id="deleteAll" type="submit" >
+                          <i class="bi bi-trash"></i>
+                        </button>
+                       </th>
+                      <th>Blog Category</th>
+                      <th>Blog Title</th>
+                      <th>Blog Description</th>
+                      <th>Blog Image</th>
+                      <th>Action</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% Blogdata.map((blog) => { %>
+                    <tr>
+                      <td> <input type="checkbox" name="Ids" value="<%= blog.id %>" /> </td>
+                      <td><%= blog.blogCategoryid.categoryname %></td>
+                      <td><%= blog.blogTitle %></td>
+                      <td><%- blog.blogDescription.substring(0, 40); %>...</td>
+                       <td><img src="<%= blog.blogImage %>" width="100px" height="100px" alt="Blog Image" /></td>
+                      <td>
+                        <a href="/updateBlogs/<%= blog.id %>" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="/deleteBlogs/<%= blog.id %>" class="btn btn-sm btn-danger">Delete</a>
+                      </td>
+                      <td>
+                        <% if (blog.status) { %>
+                          <a href="/activeblogs/?BlogsId=<%= blog.id %>&status=true" >Active</a>
+                        <% } else { %>
+                          <a href="/deactiveblogs/?BlogsId=<%= blog.id %>&status=false" >Deactive</a>
+                        <% } %>
+                      </td>
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+             </form>
+                <nav>
+                  <ul class="pagination justify-content-center">
+                    <% if (Number(page) > 0) { %>
+                    <li class="page-item">
+                      <a
+                        href="?page=<%= Number(page) - 1 %>&blogSearch=<%= search %>"
+                        class="page-link"
+                      >
+                        Previous
+                      </a>
+                    </li>
+                    <% } %>
+
+                    <% for (var i = 0; i < totalPage; i++) { %>
+                    <li class="page-item <%= page == i ? 'active' : '' %>">
+                      <a
+                        href="?page=<%= i %>&blogSearch=<%= search %>"
+                        class="page-link"
+                      >
+                        <%= i + 1 %>
+                      </a>
+                    </li>
+                    <% } %>
+
+                    <% if (Number(page) < totalPage - 1) { %>
+                    <li class="page-item">
+                      <a
+                        href="?page=<%= Number(page) + 1 %>&blogSearch=<%= search %>"
+                        class="page-link"
+                      >
+                        Next
+                      </a>
+                    </li>
+                    <% } %>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <!-- End: Card Body -->
+          </div>
+        </div>
+        <!-- End: Col -->
+      </div>
+      <!-- End: Row -->
+    </div>
+    <!-- End: Container -->
+  </div>
+  <!-- End: App Content -->
+</main>
+
+<%- include('footer') %>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+  $ ('#deleteAll').hide();
+  $("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+    $ ('#deleteAll').toggle();
+
+});
+</script>

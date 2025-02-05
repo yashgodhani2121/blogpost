@@ -1,0 +1,85 @@
+<%- include('header') %>
+
+<main class="app-main">
+  <!-- Begin: Content Header -->
+  <div class="app-content-header py-3 bg-light border-bottom">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-sm-6">
+          <h3 class="mb-0 text-primary">Comments Data Tables</h3>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item active text-muted" aria-current="page">Comments</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End: Content Header -->
+
+  <!-- Begin: Content -->
+  <div class="app-content py-4">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="card shadow-sm mb-4">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Comments Table</h5>
+            </div>
+
+            <div class="card-body">
+              <div class="table-responsive">
+                <!-- Bulk Delete Form -->
+                
+                  <table class="table table-bordered table-hover">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Post ID</th>
+                        <th>User Email</th>
+                        <th>User Name</th>
+                        <th>Comment</th>
+                        <th>Image</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% commentData.map((comment) => { %>
+                      <tr>
+                        <td><%= comment.postid %></td>
+                        <td><%= comment.email %></td>
+                        <td><%= comment.userName %></td>
+                        <td><%= comment.comment %></td>
+                        <td>
+                          <img
+                            src="<%= comment.image %>"
+                            alt="Comment Image"
+                            width="100px"
+                            height="100px"
+                          />
+                        </td>
+                        <td>
+                            <% if (comment.status) { %>
+                              <a href="/activecomment/?commentid=<%= comment.id %>&status=true" >Active</a>
+                            <% } else { %>
+                              <a href="/deactivecomment/?commentid=<%= comment.id %>&status=false" >Deactive</a>
+                            <% } %>
+                          </td>
+                      </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                
+
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('footer') %>

@@ -1,0 +1,115 @@
+<%- include('header') %>
+<main class="app-main">
+  <!--begin::App Content Header-->
+  <div class="app-content-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6"><h3 class="mb-0">Update Admin</h3></div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update Admin</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end::App Content Header-->
+  
+  <!--begin::App Content-->
+  <div class="app-content">
+    <div class="container-fluid">
+      <div class="row g-4">
+        <div class="col-12">
+          <div class="card card-primary card-outline mb-4">
+            <div class="card-header"><h4 class="card-title">Update Admin</h4></div>
+            <form method="post" action="/updateAdminRecords" enctype="multipart/form-data" class="form-horizontal">
+              <input type="hidden" name="id" value="<%= singleData.id %>">
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="fname" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="fname" name="fname" value="<%= flname[0] %>" placeholder="First Name Here">
+                </div>
+                
+                <div class="mb-3">
+                  <label for="lname" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="lname" name="lname" value="<%= flname[1] %>" placeholder="Last Name Here">
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" value="<%= singleData.email %>" placeholder="Email Here">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Gender</label>
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" id="male" name="gender" value="Male" <% if (singleData.gender === 'Male') { %>checked<% } %>>
+                    <label class="form-check-label" for="male">Male</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" id="female" name="gender" value="Female" <% if (singleData.gender === 'Female') { %>checked<% } %>>
+                    <label class="form-check-label" for="female">Female</label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Select Hobby</label>
+                  
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="cricket" name="hobby" value="Cricket"
+                      <% if (singleData && singleData.hobby) { if (singleData.hobby.includes('Cricket')) { %> checked <% } } %>
+                    >
+                    <label class="form-check-label" for="cricket">Cricket</label>
+                  </div>
+                  
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="football" name="hobby" value="Football"
+                      <% if (singleData && singleData.hobby) { if (singleData.hobby.includes('Football')) { %> checked <% } } %>
+                    >
+                    <label class="form-check-label" for="football">Football</label>
+                  </div>
+                  
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="basketball" name="hobby" value="Basketball"
+                          <% if (singleData && singleData.hobby) { if (singleData.hobby.includes('Basketball')) { %> checked <% } } %>
+                    >
+                    <label class="form-check-label" for="basketball">Basketball</label>
+                  </div>
+                </div>
+                
+
+                <div class="mb-3">
+                  <label for="city" class="form-label">City</label>
+                  <select class="form-select" id="city" name="city">
+                    <option value="">Select City</option>
+                    <% ['Surat', 'Rajkot', 'Vadodara'].map((v) => { %>
+                      <option value="<%= v %>" <% if (singleData.city === v) { %>selected<% } %>><%= v %></option>
+                    <% }) %>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-control" id="message" name="message" placeholder="Message Here"><%= singleData.message %></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label for="adminImage" class="form-label">Upload Admin Image</label>
+                  <input type="file" class="form-control" id="adminImage" name="image">
+                  <% if (singleData.image) { %>
+                    <br>
+                    <img src="<%= singleData.image %>" width="100px" alt="Admin Image">
+                  <% } %>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<%- include('footer') %>

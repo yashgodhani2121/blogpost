@@ -1,0 +1,104 @@
+<%- include('header') %>
+
+<main class="app-main">
+  <!-- Begin: App Content Header -->
+  <div class="app-content-header py-3 bg-light border-bottom">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-sm-6">
+          <h3 class="mb-0 text-primary">Admin Data Tables</h3>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item active text-muted" aria-current="page">Simple Tables</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Begin: App Content -->
+  <div class="app-content py-4">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="card shadow-sm mb-4">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Edit Blog Table</h5>
+            </div>
+
+            <div class="card-body">
+              <div class="table-responsive">
+                <form action="/editBlogs" method="post" enctype="multipart/form-data">
+                  <table class="table table-bordered table-striped">
+                    <input type="hidden" name="id" value="<%=singledata.id %>"/>
+                    <tr>
+                      <td >Blog Category:</td>
+                      <td>
+                        <select name="blogCategoryid" class="form-select">
+                          <option value="">--select category--</option>
+                          <% categorydata.map((category) => { %>
+                            <option value="<%= category._id %>" 
+                                <% if (singledata.blogCategoryid == category.id) { %> 
+                                    selected 
+                                <% } %>>
+                              <%= category.categoryname %>
+                            </option>
+                          <% }); %>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td >Blog Title:</td>
+                      <td><input type="text" name="blogTitle" value="<%=singledata.blogTitle %>" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                      <td >Blog Description:</td>
+                      <td>
+                        <textarea name="blogDescription" class="form-control"><%-singledata.blogDescription %></textarea>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Blog Image</td>
+                      <td>
+                          <img src="<%=singledata.blogImage %>" width="100" height="100"/>
+                          <input type="file" name="blogImage"/></td>
+                  </tr>
+                    <tr>
+                      <td></td>
+                      <td><input type="submit" value="Submit" class="btn btn-primary" /></td>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('footer') %>
+<script src="https://cdn.tiny.cloud/1/k1c5nasb1xhle8mpx6p4eunmxjjq1780banwuch3gxm0n76z/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: [
+        // Core editing features
+        'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+        // Your account includes a free trial of TinyMCE premium features
+        // Try the most popular premium features until Feb 5, 2025:
+        'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+      ],
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+      ],
+      ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+    });
+  </script>

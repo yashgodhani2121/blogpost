@@ -1,0 +1,104 @@
+<%- include('header') %>
+
+<main class="app-main">
+  <!-- Begin: App Content Header -->
+  <div class="app-content-header py-3 bg-light border-bottom">
+    <!-- Begin: Container -->
+    <div class="container-fluid">
+      <!-- Begin: Row -->
+      <div class="row align-items-center">
+        <div class="col-sm-6">
+          <h3 class="mb-0 text-primary">Admin Data Tables</h3>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item active text-muted" aria-current="page">Simple Tables</li>
+          </ol>
+        </div>
+      </div>
+      <!-- End: Row -->
+    </div>
+    <!-- End: Container -->
+  </div>
+  <!-- End: App Content Header -->
+
+  <!-- Begin: App Content -->
+  <div class="app-content py-4">
+    <!-- Begin: Container -->
+    <div class="container-fluid">
+      <!-- Begin: Row -->
+      <div class="row justify-content-center">
+        <!-- Begin: Col -->
+        <div class="col-md-10">
+          <div class="card shadow-sm mb-4">
+            <!-- Begin: Card Header -->
+            <div class="card-header  text-black">
+              <h5 class="card-title mb-0">Admin Table</h5>
+            </div>
+            <!-- End: Card Header -->
+
+            <!-- Begin: Card Body -->
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                  <thead class="table-dark">
+                    <tr>
+                      <th style="width: 5%">#</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Message</th>
+                      <th>Gender</th>
+                      <th>Hobby</th>
+                      <th>City</th>
+                      <th>Image</th>
+                      <th style="width: 15%">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% admindata.map((v, i) => { %>
+                      <tr>
+                        <td><%= i + 1 %></td>
+                        <td><%= v.name %></td>
+                        <td><%= v.email %></td>
+                        <td><%= v.message %></td>
+                        <td><%= v.gender %></td>
+                        <td><%= v.hobby %></td>
+                        <td><%= v.city %></td>
+                        <td>
+                          <img 
+                            src="<%= v.image %>" 
+                            alt="<%= v.name %>" 
+                            class="img-thumbnail" 
+                            width="50" 
+                            height="50">
+                        </td>
+                        <td>
+                          <div class="d-grid gap-2">
+                            <a href="/updateAdmin/<%= v.id %>" class="btn btn-sm btn-primary">
+                              <i class="fa fa-edit"></i> Edit
+                            </a>
+                            <a href="/deleteadmin/<%= v.id %>" class="btn btn-sm btn-danger">
+                              <i class="fa fa-trash"></i> Delete
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- End: Card Body -->
+          </div>
+        </div>
+        <!-- End: Col -->
+      </div>
+      <!-- End: Row -->
+    </div>
+    <!-- End: Container -->
+  </div>
+  <!-- End: App Content -->
+</main>
+
+<%- include('footer') %>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <link rel="stylesheet" href="/css/userRegister.css"> 
+</head>
+
+<body>
+  <%-include('header2')%>
+  <div class="loginform">
+    <div class="overlay">
+    <form action="/checkRegister" method="post">
+               <h2>Register</h2>   
+            <div class="title">Welcome</div>
+            <div class="subtitle">Let's create your account!</div>
+            <input id="firstname" name="username" class="input" type="text" placeholder="Enter name" style="margin:10px 0; " />
+            <input id="email" name="email" class="input" type="text" placeholder="Email" style="margin:10px 0; " />
+            <input id="password" name="password" class="input" type="password" placeholder="Password" style="margin:10px 0; " />
+            <input id="cpassword" name="cpassword" class="input" type="password" placeholder="Confirm password" style="margin:10px 0; " />
+            <button class="log-in"  type="submit" class="submit">Submit</button>      
+    </form>
+</div>
+</body>
+</html>

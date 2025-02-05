@@ -1,0 +1,162 @@
+<%- include('header') %> 
+<main class="app-main">
+    <!--begin::App Content Header-->
+    <div class="app-content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6"><h3 class="mb-0">General Form</h3></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-end">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">General Form</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end::App Content Header-->
+
+    <div class="app-content">
+      <div class="container-fluid">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="card card-primary card-outline mb-4">
+              <div class="card-header">
+                <div class="card-title">Quick Example</div>
+              </div>
+    
+              <form method="post" action="/insertadmin" enctype="multipart/form-data" class="form-horizontal">
+                <div class="card-body">
+                  <h4 class="card-title mb-4">Add Admin</h4>
+              
+                  <div class="mb-3">
+                    <label for="fname" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name Here" value="<%= old && old.fname %>">
+                    <% if (errordata && errordata.fname) { %>
+                      <div class="alert alert-danger">
+                        <%= errordata.fname.msg %>
+                      </div>
+                    <% } %>
+                  </div>
+              
+                  <div class="mb-3">
+                    <label for="lname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name Here" value="<%= old && old.lname %>">
+                    <% if (errordata && errordata.lname) { %>
+                      <div class="alert alert-danger">
+                        <%= errordata.lname.msg %>
+                      </div>
+                    <% } %>
+                  </div>
+              
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email Here" value="<%= old && old.email %>">
+                    <% if (errordata && errordata.email) { %>
+                      <div class="alert alert-danger">
+                        <%= errordata.email.msg %>
+                      </div>
+                    <% } %>
+                  </div>
+              
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password Here">
+                    <% if (errordata && errordata.password) { %>
+                      <div class="alert alert-danger">
+                        <%= errordata.password.msg %>
+                      </div>
+                    <% } %>
+                  </div>
+              
+                  <div class="mb-3">
+                    <label class="form-label">Select Hobby</label>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="cricket" name="hobby" value="Cricket"
+                        <% if (old && old.hobby){if (old.hobby.includes("Cricket")){ %> checked <% }} %>
+                      >
+                      <label class="form-check-label" for="cricket">Cricket</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="football" name="hobby" value="Football"
+                        <% if (old && old.hobby){if (old.hobby.includes("Football")){ %> checked <% }} %>
+                      >
+                      <label class="form-check-label" for="football">Football</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="basketball" name="hobby" value="Basketball"
+                        <% if (old && old.hobby){if (old.hobby.includes("Basketball")){ %> checked <% }} %>
+                      >
+                      <label class="form-check-label" for="basketball">Basketball</label>
+                    </div>
+                    <% if (errordata && errordata.hobby) { %>
+                      <div class="alert alert-danger">
+                        <%= errordata.hobby.msg %>
+                      </div>
+                    <% } %>
+                  </div>
+                  
+              
+                  <div class="mb-3">
+                    <label for="city" class="form-label">Select City</label>
+                    <select class="form-select" id="city" name="city">
+                      <option value="">Select City</option>
+                      <% var cityName = ["New York", "London", "Paris", "Tokyo"]; %>
+                      <% cityName.map((v) => { %>
+                        <option value="<%= v %>" <% if (old && old.city === v) { %> selected <% } %>><%= v %></option>
+                      <% }); %>
+                    </select>
+                    <% if (errordata && errordata.city) { %>
+                      <div class="alert alert-danger">
+                        <%= errordata.city.msg %>
+                      </div>
+                    <% } %>
+                  </div>
+              
+                  <div class="mb-3">
+                    <label class="form-label">Gender</label>
+                    <div class="form-check">
+                      <input type="radio" class="form-check-input" id="male" name="gender" value="Male" <% if (old && old.gender === 'Male') { %> checked <% } %>>
+                      <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="radio" class="form-check-input" id="female" name="gender" value="Female" <% if (old && old.gender === 'Female') { %> checked <% } %>>
+                      <label class="form-check-label" for="female">Female</label>
+                    </div>
+                    <% if (errordata && errordata.gender) { %>
+                      <div class="alert alert-danger">
+                        <%= errordata.gender.msg %>
+                      </div>
+                    <% } %>
+                  </div>
+              
+                  <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" name="message" placeholder="Message Here"><%= old && old.message %></textarea>
+                    <% if (errordata && errordata.message) { %>
+                      <div class="alert alert-danger">
+                        <%= errordata.message.msg %>
+                      </div>
+                    <% } %>
+                  </div>
+              
+                  <div class="mb-3">
+                    <label for="image" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                  </div>
+                </div>
+              
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</main>
+
+<%- include('footer') %>

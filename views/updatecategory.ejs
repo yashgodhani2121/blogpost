@@ -1,0 +1,58 @@
+<%- include('header') %>
+
+<main class="app-main">
+  <div class="app-content-header py-3 bg-light border-bottom">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-sm-6">
+          <h3 class="mb-0 text-primary">Edit Category</h3>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item"><a href="/category/viewcategory" class="text-decoration-none">Categories</a></li>
+            <li class="breadcrumb-item active text-muted" aria-current="page">Edit Category</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-content py-4">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card shadow-sm">
+            <div class="card-header text-black">
+              <h5 class="card-title mb-0">Edit Category</h5>
+            </div>
+            <div class="card-body">
+              <form action="/editCategory" method="post">
+            
+                <input type="hidden" name="id" value="<%=singledata.id %>">
+
+                <!-- Category Name -->
+                <div class="mb-3">
+                  <label for="categoryName" class="form-label">Category Name:</label>
+                  <input
+                    type="text"
+                    id="categoryName"
+                    name="categoryname"
+                    class="form-control"
+                    value="<%= singledata.categoryname %>"
+                    required
+                  />
+                </div>
+
+                  <button type="submit" class="btn btn-primary">Update</button>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('footer') %>
