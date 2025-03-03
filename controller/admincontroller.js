@@ -8,6 +8,7 @@ const fs = require("fs");
 const AesEncryption = require('aes-encryption')
 const aes = new AesEncryption()
 const {validationResult}= require("express-validator");
+const session = require('express-session');
 module.exports.dashboard=async(req,res)=>{
     try{
         const Blog=await blog.find();
@@ -224,13 +225,15 @@ module.exports.adminlogin=async(req,res)=>{
 }
 module.exports.adminlogout=(req,res)=>{
  try{
-  req.session.destroy(function(err){
+  console.log(session);
+  
+  req.session.destroy((err)=>{
     if(err){
       console.log(err);
-      return  false;
+    
     }
     req.flash('success','You have logged out successfully');
-  return res.redirect('/')
+  return res.redirect('/adminsignin')
    })
   }
    catch(err){

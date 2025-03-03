@@ -8,12 +8,12 @@ const app= express();
 
 const session = require('express-session');
 const passport = require('passport');
-const LocalStrategy= require("./config/passport-local-strategy");
-const flash = require('connect-flash');
+const LocalStategy= require("./config/passport-local-strategy");
+const flash = require("connect-flash");
 const flashMessage= require("./config/flashMessge");
 const mongoose=require('mongoose');
 
- mongoose.connect("mongodb+srv://ikmedia2121:H2xVJGXGXe2BfnK7@cluster0.uwvaa.mongodb.net/adminpanel").then((res) => {
+ mongoose.connect("mongodb+srv://godhaniy79:yash2122@cluster0.enyby.mongodb.net/adminpanel2").then((res) => {
   console.log("connected to database");
   }).catch((err) => {
     console.log(err,"not connected to database");
@@ -32,15 +32,19 @@ app.use(session({
   name: 'session',
   secret: 'secret',
   resave: false,
-  saveUninitialized: false ,
+  saveUninitialized: false,
   cookie: { maxAge: 1000*60*60 }
-}))
+}));
+
+
+
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthuser);
-app.use(flash());
 app.use(flashMessage.setFlash);
 app.use("/",require('./routes/adminroutes'))
+
 
 
 
